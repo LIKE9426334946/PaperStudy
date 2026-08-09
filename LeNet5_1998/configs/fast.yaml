@@ -1,0 +1,43 @@
+experiment:
+  name: lenet5_fast_validation
+  seed: 1998
+  output_dir: results/fast
+  checkpoint_dir: checkpoints/fast
+
+device: auto
+
+data:
+  root: data
+  download: true
+  num_workers: 0
+  pin_memory: true
+  batch_size: 128
+  samples_per_epoch: 60000
+  augmentation:
+    enabled: true
+    variants_per_image: 2
+    translate_pixels: 2.0
+    scale_fraction: 0.15
+    squeeze_fraction: 0.15
+    shear_degrees: 15.0
+
+model:
+  activation_amplitude: 1.7159
+  activation_slope: 0.6666666667
+  trainable_rbf: false
+
+loss:
+  name: rbf_mse
+  rubbish_class_j: 10.0
+
+training:
+  epochs: 10
+  optimizer: sgd
+  momentum: 0.9
+  weight_decay: 0.0
+  gradient_clip_norm: null
+  log_interval: 100
+  learning_rate_schedule:
+    - [0, 0.05]
+    - [5, 0.01]
+    - [8, 0.001]
