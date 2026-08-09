@@ -1,0 +1,9 @@
+data/
+checkpoints/*
+!checkpoints/.gitkeep
+results/*
+!results/.gitkeep
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
