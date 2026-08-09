@@ -103,10 +103,7 @@ def _trainable_parameter_dict(model: nn.Module) -> dict[str, nn.Parameter]:
 def _empty_curvature(
     parameters: dict[str, nn.Parameter],
 ) -> dict[str, torch.Tensor]:
-    return {
-        name: torch.zeros_like(parameter)
-        for name, parameter in parameters.items()
-    }
+    return {name: torch.zeros_like(parameter) for name, parameter in parameters.items()}
 
 
 def _exact_batch_curvature(
@@ -224,6 +221,5 @@ def estimate_rbf_ggn_diagonal(
     if processed == 0:
         raise RuntimeError("Curvature loader produced no samples.")
     return {
-        name: value.div(float(processed)).detach()
-        for name, value in totals.items()
+        name: value.div(float(processed)).detach() for name, value in totals.items()
     }
