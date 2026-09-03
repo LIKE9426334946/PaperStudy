@@ -152,9 +152,12 @@ class Bottleneck(nn.Module):
         super().__init__()
         out_channels = channels * self.expansion
 
-        self.conv1 = conv1x1(in_channels, channels)
+        # The authors' released Caffe model puts a stage-transition stride on
+        # this first 1x1 convolution. Moving it to the 3x3 convolution is the
+        # later ResNet-v1.5 variant, not the original implementation.
+        self.conv1 = conv1x1(in_channels, channels, stride=stride)
         self.bn1 = nn.BatchNorm2d(channels)
-        self.conv2 = conv3x3(channels, channels, stride=stride)
+        self.conv2 = conv3x3(channels, channels)
         self.bn2 = nn.BatchNorm2d(channels)
         self.conv3 = conv1x1(channels, out_channels)
         self.bn3 = nn.BatchNorm2d(out_channels)
@@ -165,7 +168,7 @@ class Bottleneck(nn.Module):
         identity = self.shortcut(x)
         # identity: [B, 4 * channels, H / stride, W / stride]
 
-        # Channel reduction: 1x1 convolution.
+        # Channel reduction (and stage-transition downsampling): 1x1 conv.
         residual = self.conv1(x)
         residual = self.bn1(residual)
         residual = F.relu(residual, inplace=True)

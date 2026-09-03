@@ -7,6 +7,7 @@
 - **会议**：IEEE Conference on Computer Vision and Pattern Recognition（CVPR）
 - **年份**：2016
 - **论文链接**：[CVF Open Access](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html)
+- **作者公开实现**：[KaimingHe/deep-residual-networks](https://github.com/KaimingHe/deep-residual-networks)
 
 ## 论文简介
 
@@ -127,6 +128,8 @@ x -> 1x1 Conv -> BN -> ReLU
 
 第一个 \(1\times1\) 卷积压缩通道，中间 \(3\times3\) 卷积处理空间信息，最后一个 \(1\times1\) 卷积将通道恢复为基础宽度的 4 倍。例如，Figure 5 的残差分支为 \(256\rightarrow64\rightarrow64\rightarrow256\)。Bottleneck 的主要目的不是改变残差学习原理，而是降低深层网络的计算成本。
 
+原作者公开的 Caffe 模型在切换 stage 时，把 stride=2 放在 Bottleneck 的第一个 \(1\times1\) 卷积上；本实现保持这一原始位置。`torchvision` 中常见的 ResNet-v1.5 则把 stride=2 移到中间的 \(3\times3\) 卷积上，两者输出 shape 相同，但具体计算与精度可能略有差异。
+
 ### OptionAShortcut
 
 `OptionAShortcut` 对空间维度执行 stride 采样，并用 0 补齐新增通道。它完整展示了论文方案 A 的无参数维度匹配过程，没有用可学习卷积代替。
@@ -212,6 +215,7 @@ BasicBlock 的 `expansion=1`，因此 ResNet-18/34 四个 stage 的通道数为 
 - 原始 post-activation 残差块：卷积后接 BN，残差相加后再接 ReLU。
 - BasicBlock 使用两个 \(3\times3\) 卷积。
 - Bottleneck 使用 \(1\times1\)、\(3\times3\)、\(1\times1\) 卷积。
+- 作者公开实现把 Bottleneck 的 stage-transition stride 放在第一个 \(1\times1\) 卷积，而非后来 ResNet-v1.5 的 \(3\times3\) 卷积。
 - 特征图尺寸减半时，通道数翻倍；下采样由 stride=2 卷积完成。
 - ImageNet 各深度的 block 数量及 A/B/C 三种 shortcut 方案。
 - CIFAR 模型采用 16、32、64 个通道，总深度为 \(6n+2\)，全部使用方案 A。
