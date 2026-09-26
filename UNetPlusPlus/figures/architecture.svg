@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1080" viewBox="0 0 1280 1080" role="img" aria-labelledby="title desc">
+<title id="title">UNet++ nested dense skip pathways</title>
+<desc id="desc">15 feature nodes in five resolution levels. Gray edges pool, green edges upsample, blue edges concatenate all earlier same-level nodes, red edges lead to four prediction heads.</desc>
+<defs>
+  <marker id="pool" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#697586" /></marker>
+  <marker id="up" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#188568" /></marker>
+  <marker id="skip" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#527ed4" /></marker>
+  <marker id="head" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c44c60" /></marker>
+</defs>
+<rect width="1280" height="1080" fill="#f8fafc" />
+<g font-family="sans-serif">
+<text x="52" y="58" fill="#14263d" font-size="30" font-weight="700">UNet++ / nested dense skip pathways</text>
+<text x="52" y="90" fill="#526174" font-size="17">2018 architecture | node names match model.py | each incoming set is concatenated</text>
+
+<path d="M360,250 L360,196" stroke="#c44c60" stroke-width="2.3" fill="none" />
+<polygon points="360.00,200.00 364.00,209.00 356.00,209.00" fill="#c44c60" /><rect x="269" y="137" width="182" height="58" rx="12" fill="#fff0f2" stroke="#c44c60" />
+<text x="360" y="160" text-anchor="middle" font-size="16" fill="#8e2439">head1 / 1x1 Conv</text>
+<text x="360" y="182" text-anchor="middle" font-size="14" fill="#8e2439">sigmoid -&gt; p1</text>
+<path d="M610,250 L610,196" stroke="#c44c60" stroke-width="2.3" fill="none" />
+<polygon points="610.00,200.00 614.00,209.00 606.00,209.00" fill="#c44c60" /><rect x="519" y="137" width="182" height="58" rx="12" fill="#fff0f2" stroke="#c44c60" />
+<text x="610" y="160" text-anchor="middle" font-size="16" fill="#8e2439">head2 / 1x1 Conv</text>
+<text x="610" y="182" text-anchor="middle" font-size="14" fill="#8e2439">sigmoid -&gt; p2</text>
+<path d="M860,250 L860,196" stroke="#c44c60" stroke-width="2.3" fill="none" />
+<polygon points="860.00,200.00 864.00,209.00 856.00,209.00" fill="#c44c60" /><rect x="769" y="137" width="182" height="58" rx="12" fill="#fff0f2" stroke="#c44c60" />
+<text x="860" y="160" text-anchor="middle" font-size="16" fill="#8e2439">head3 / 1x1 Conv</text>
+<text x="860" y="182" text-anchor="middle" font-size="14" fill="#8e2439">sigmoid -&gt; p3</text>
+<path d="M1110,250 L1110,196" stroke="#c44c60" stroke-width="2.3" fill="none" />
+<polygon points="1110.00,200.00 1114.00,209.00 1106.00,209.00" fill="#c44c60" /><rect x="1019" y="137" width="182" height="58" rx="12" fill="#fff0f2" stroke="#c44c60" />
+<text x="1110" y="160" text-anchor="middle" font-size="16" fill="#8e2439">head4 / 1x1 Conv</text>
+<text x="1110" y="182" text-anchor="middle" font-size="14" fill="#8e2439">sigmoid -&gt; p4</text>
+<text x="52" y="179" fill="#526174" font-size="15">mean(p1, p2, p3, p4)</text>
+<text x="52" y="210" fill="#526174" font-size="15">or choose one trained head</text>
+<path d="M130,310 L215,410" stroke="#697586" stroke-width="2.5" fill="none" />
+<polygon points="212.41,406.95 203.53,402.69 209.63,397.50" fill="#697586" /><path d="M255,470 L340,570" stroke="#697586" stroke-width="2.5" fill="none" />
+<polygon points="337.41,566.95 328.53,562.69 334.63,557.50" fill="#697586" /><path d="M380,630 L465,730" stroke="#697586" stroke-width="2.5" fill="none" />
+<polygon points="462.41,726.95 453.53,722.69 459.63,717.50" fill="#697586" /><path d="M505,790 L590,890" stroke="#697586" stroke-width="2.5" fill="none" />
+<polygon points="587.41,886.95 578.53,882.69 584.63,877.50" fill="#697586" /><path d="M255,410 L340,310" stroke="#188568" stroke-width="2.5" fill="none" />
+<polygon points="337.41,313.05 334.63,322.50 328.53,317.31" fill="#188568" /><path d="M163,280 L304,280" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="300.00,280.00 291.00,284.00 291.00,276.00" fill="#527ed4" /><path d="M505,410 L590,310" stroke="#188568" stroke-width="2.5" fill="none" />
+<polygon points="587.41,313.05 584.63,322.50 578.53,317.31" fill="#188568" /><path d="M154,295 C205,335 505,335 559,299" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="555.67,301.22 550.40,309.54 545.96,302.88" fill="#527ed4" /><path d="M413,280 L554,280" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="550.00,280.00 541.00,284.00 541.00,276.00" fill="#527ed4" /><path d="M755,410 L840,310" stroke="#188568" stroke-width="2.5" fill="none" />
+<polygon points="837.41,313.05 834.63,322.50 828.53,317.31" fill="#188568" /><path d="M154,295 C205,350 755,350 809,299" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="806.09,301.75 802.30,310.83 796.80,305.02" fill="#527ed4" /><path d="M404,295 C455,335 755,335 809,299" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="805.67,301.22 800.40,309.54 795.96,302.88" fill="#527ed4" /><path d="M663,280 L804,280" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="800.00,280.00 791.00,284.00 791.00,276.00" fill="#527ed4" /><path d="M1005,410 L1090,310" stroke="#188568" stroke-width="2.5" fill="none" />
+<polygon points="1087.41,313.05 1084.63,322.50 1078.53,317.31" fill="#188568" /><path d="M154,295 C205,365 1005,365 1059,299" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="1056.47,302.10 1053.86,311.59 1047.67,306.53" fill="#527ed4" /><path d="M404,295 C455,350 1005,350 1059,299" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="1056.09,301.75 1052.30,310.83 1046.80,305.02" fill="#527ed4" /><path d="M654,295 C705,335 1005,335 1059,299" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="1055.67,301.22 1050.40,309.54 1045.96,302.88" fill="#527ed4" /><path d="M913,280 L1054,280" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="1050.00,280.00 1041.00,284.00 1041.00,276.00" fill="#527ed4" /><path d="M380,570 L465,470" stroke="#188568" stroke-width="2.5" fill="none" />
+<polygon points="462.41,473.05 459.63,482.50 453.53,477.31" fill="#188568" /><path d="M288,440 L429,440" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="425.00,440.00 416.00,444.00 416.00,436.00" fill="#527ed4" /><path d="M630,570 L715,470" stroke="#188568" stroke-width="2.5" fill="none" />
+<polygon points="712.41,473.05 709.63,482.50 703.53,477.31" fill="#188568" /><path d="M279,455 C330,495 630,495 684,459" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="680.67,461.22 675.40,469.54 670.96,462.88" fill="#527ed4" /><path d="M538,440 L679,440" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="675.00,440.00 666.00,444.00 666.00,436.00" fill="#527ed4" /><path d="M880,570 L965,470" stroke="#188568" stroke-width="2.5" fill="none" />
+<polygon points="962.41,473.05 959.63,482.50 953.53,477.31" fill="#188568" /><path d="M279,455 C330,510 880,510 934,459" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="931.09,461.75 927.30,470.83 921.80,465.02" fill="#527ed4" /><path d="M529,455 C580,495 880,495 934,459" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="930.67,461.22 925.40,469.54 920.96,462.88" fill="#527ed4" /><path d="M788,440 L929,440" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="925.00,440.00 916.00,444.00 916.00,436.00" fill="#527ed4" /><path d="M505,730 L590,630" stroke="#188568" stroke-width="2.5" fill="none" />
+<polygon points="587.41,633.05 584.63,642.50 578.53,637.31" fill="#188568" /><path d="M413,600 L554,600" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="550.00,600.00 541.00,604.00 541.00,596.00" fill="#527ed4" /><path d="M755,730 L840,630" stroke="#188568" stroke-width="2.5" fill="none" />
+<polygon points="837.41,633.05 834.63,642.50 828.53,637.31" fill="#188568" /><path d="M404,615 C455,655 755,655 809,619" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="805.67,621.22 800.40,629.54 795.96,622.88" fill="#527ed4" /><path d="M663,600 L804,600" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="800.00,600.00 791.00,604.00 791.00,596.00" fill="#527ed4" /><path d="M630,890 L715,790" stroke="#188568" stroke-width="2.5" fill="none" />
+<polygon points="712.41,793.05 709.63,802.50 703.53,797.31" fill="#188568" /><path d="M538,760 L679,760" stroke="#527ed4" stroke-width="1.8" opacity="0.82" fill="none" />
+<polygon points="675.00,760.00 666.00,764.00 666.00,756.00" fill="#527ed4" /><rect x="57" y="250" width="106" height="60" rx="14" fill="#e8eff8" stroke="#627895" stroke-width="1.8" />
+<text x="110" y="277" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x0_0</text>
+<text x="110" y="299" text-anchor="middle" font-size="13" fill="#526174">C = 32</text>
+<rect x="307" y="250" width="106" height="60" rx="14" fill="#ecf8f2" stroke="#278467" stroke-width="1.8" />
+<text x="360" y="277" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x0_1</text>
+<text x="360" y="299" text-anchor="middle" font-size="13" fill="#526174">C = 32</text>
+<rect x="557" y="250" width="106" height="60" rx="14" fill="#ecf8f2" stroke="#278467" stroke-width="1.8" />
+<text x="610" y="277" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x0_2</text>
+<text x="610" y="299" text-anchor="middle" font-size="13" fill="#526174">C = 32</text>
+<rect x="807" y="250" width="106" height="60" rx="14" fill="#ecf8f2" stroke="#278467" stroke-width="1.8" />
+<text x="860" y="277" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x0_3</text>
+<text x="860" y="299" text-anchor="middle" font-size="13" fill="#526174">C = 32</text>
+<rect x="1057" y="250" width="106" height="60" rx="14" fill="#ecf8f2" stroke="#278467" stroke-width="1.8" />
+<text x="1110" y="277" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x0_4</text>
+<text x="1110" y="299" text-anchor="middle" font-size="13" fill="#526174">C = 32</text>
+<rect x="182" y="410" width="106" height="60" rx="14" fill="#e8eff8" stroke="#627895" stroke-width="1.8" />
+<text x="235" y="437" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x1_0</text>
+<text x="235" y="459" text-anchor="middle" font-size="13" fill="#526174">C = 64</text>
+<rect x="432" y="410" width="106" height="60" rx="14" fill="#ecf8f2" stroke="#278467" stroke-width="1.8" />
+<text x="485" y="437" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x1_1</text>
+<text x="485" y="459" text-anchor="middle" font-size="13" fill="#526174">C = 64</text>
+<rect x="682" y="410" width="106" height="60" rx="14" fill="#ecf8f2" stroke="#278467" stroke-width="1.8" />
+<text x="735" y="437" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x1_2</text>
+<text x="735" y="459" text-anchor="middle" font-size="13" fill="#526174">C = 64</text>
+<rect x="932" y="410" width="106" height="60" rx="14" fill="#ecf8f2" stroke="#278467" stroke-width="1.8" />
+<text x="985" y="437" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x1_3</text>
+<text x="985" y="459" text-anchor="middle" font-size="13" fill="#526174">C = 64</text>
+<rect x="307" y="570" width="106" height="60" rx="14" fill="#e8eff8" stroke="#627895" stroke-width="1.8" />
+<text x="360" y="597" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x2_0</text>
+<text x="360" y="619" text-anchor="middle" font-size="13" fill="#526174">C = 128</text>
+<rect x="557" y="570" width="106" height="60" rx="14" fill="#ecf8f2" stroke="#278467" stroke-width="1.8" />
+<text x="610" y="597" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x2_1</text>
+<text x="610" y="619" text-anchor="middle" font-size="13" fill="#526174">C = 128</text>
+<rect x="807" y="570" width="106" height="60" rx="14" fill="#ecf8f2" stroke="#278467" stroke-width="1.8" />
+<text x="860" y="597" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x2_2</text>
+<text x="860" y="619" text-anchor="middle" font-size="13" fill="#526174">C = 128</text>
+<rect x="432" y="730" width="106" height="60" rx="14" fill="#e8eff8" stroke="#627895" stroke-width="1.8" />
+<text x="485" y="757" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x3_0</text>
+<text x="485" y="779" text-anchor="middle" font-size="13" fill="#526174">C = 256</text>
+<rect x="682" y="730" width="106" height="60" rx="14" fill="#ecf8f2" stroke="#278467" stroke-width="1.8" />
+<text x="735" y="757" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x3_1</text>
+<text x="735" y="779" text-anchor="middle" font-size="13" fill="#526174">C = 256</text>
+<rect x="557" y="890" width="106" height="60" rx="14" fill="#e8eff8" stroke="#627895" stroke-width="1.8" />
+<text x="610" y="917" text-anchor="middle" font-size="20" font-weight="600" fill="#18324d">x4_0</text>
+<text x="610" y="939" text-anchor="middle" font-size="13" fill="#526174">C = 512</text>
+<text x="1064" y="445" fill="#526174" font-size="15">1/2 resolution</text>
+<text x="939" y="605" fill="#526174" font-size="15">1/4 resolution</text>
+<text x="814" y="765" fill="#526174" font-size="15">1/8 resolution</text>
+<text x="689" y="925" fill="#526174" font-size="15">1/16 resolution</text>
+<text x="737" y="951" fill="#526174" font-size="15">bottleneck</text>
+<line x1="52" y1="984" x2="1228" y2="984" stroke="#d8e0e8" />
+
+<line x1="52" y1="1020" x2="85" y2="1020" stroke="#697586" stroke-width="3" /><text x="95" y="1025" fill="#344a63" font-size="15">Pool / downsample</text>
+<line x1="350" y1="1020" x2="383" y2="1020" stroke="#188568" stroke-width="3" /><text x="393" y="1025" fill="#344a63" font-size="15">U / upsample</text>
+<line x1="640" y1="1020" x2="673" y2="1020" stroke="#527ed4" stroke-width="3" /><text x="683" y="1025" fill="#344a63" font-size="15">Dense same-level skip</text>
+<line x1="980" y1="1020" x2="1013" y2="1020" stroke="#c44c60" stroke-width="3" /><text x="1023" y="1025" fill="#344a63" font-size="15">Prediction head</text>
+</g></svg>
