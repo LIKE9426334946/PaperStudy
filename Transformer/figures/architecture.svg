@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="1310" viewBox="0 0 1180 1310" role="img" aria-labelledby="title desc">
+<title id="title">Transformer encoder-decoder architecture</title>
+<desc id="desc">A top-down reading diagram of Attention Is All You Need. Both sides share the embedding matrix. Each encoder layer contains self-attention and a feed-forward network. Each decoder layer contains causal self-attention, cross-attention over final encoder memory, and a feed-forward network. Every sublayer uses residual dropout followed by addition and layer normalization.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#40516b"/></marker><marker id="memory-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#23796a"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#182b49} .title{font-size:28px;font-weight:700} .sub{font-size:16px;fill:#52617a} .label{font-size:18px;font-weight:600} .detail{font-size:15px;fill:#52617a} .group{font-size:15px;font-weight:700;letter-spacing:1px} .edge{fill:none;stroke:#40516b;stroke-width:2;stroke-linejoin:round;marker-end:url(#arrow)} .skip{fill:none;stroke:#93a0b2;stroke-width:1.8;stroke-linejoin:round;marker-end:url(#arrow)}</style>
+<rect width="1180" height="1310" fill="#fff"/>
+
+<text x="50" y="48" class="title" text-anchor="start" >TRANSFORMER · Attention Is All You Need</text>
+<text x="50" y="79" class="sub" text-anchor="start" >Original Post-LN architecture | N = 6 per stack | B: batch, S: source length, T: target length</text>
+<rect x="160" y="125" width="300" height="60" rx="12" fill="#f4f6fa" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="310.0" y="152.0" class="label" text-anchor="middle" >Source token IDs</text>
+<text x="310.0" y="175.0" class="detail" text-anchor="middle" >[B, S]</text>
+<rect x="755" y="125" width="300" height="60" rx="12" fill="#f4f6fa" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="905.0" y="152.0" class="label" text-anchor="middle" >Shifted target token IDs</text>
+<text x="905.0" y="175.0" class="detail" text-anchor="middle" >[B, T] · starts with BOS</text>
+<rect x="160" y="230" width="300" height="96" rx="12" fill="#f4edfd" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="310" y="256" class="label" text-anchor="middle" >Shared embedding E × √D</text>
+<text x="310" y="282" class="detail" text-anchor="middle" >+ sinusoidal position encoding</text>
+<text x="310" y="307" class="detail" text-anchor="middle" >Dropout → [B, length, D]</text>
+<rect x="755" y="230" width="300" height="96" rx="12" fill="#f4edfd" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="905" y="256" class="label" text-anchor="middle" >Shared embedding E × √D</text>
+<text x="905" y="282" class="detail" text-anchor="middle" >+ sinusoidal position encoding</text>
+<text x="905" y="307" class="detail" text-anchor="middle" >Dropout → [B, length, D]</text>
+<path d="M310 185 V230" class="edge"/>
+<path d="M905 185 V230" class="edge"/>
+<path d="M460 270 H755" fill="none" stroke="#9978bf" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="605" y="253" class="detail" text-anchor="middle" >same E</text>
+<rect x="80" y="359" width="470" height="446" rx="18" fill="#f7faff" stroke="#cedbee" stroke-width="1.5"/>
+<rect x="675" y="359" width="465" height="621" rx="18" fill="#f8fafb" stroke="#d1dce1" stroke-width="1.5"/>
+<text x="105" y="383" class="group" text-anchor="start" >ENCODER LAYER × N</text>
+<text x="700" y="383" class="group" text-anchor="start" >DECODER LAYER × N</text>
+<rect x="160" y="413" width="300" height="60" rx="12" fill="#edf4fd" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="310.0" y="440.0" class="label" text-anchor="middle" >Multi-head self-attention</text>
+<text x="310.0" y="463.0" class="detail" text-anchor="middle" >Q, K, V from source state</text>
+<rect x="160" y="513" width="300" height="44" rx="12" fill="#fff4d6" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="310.0" y="541.0" class="label" text-anchor="middle" >Add &amp; Norm</text>
+<rect x="160" y="623" width="300" height="60" rx="12" fill="#edf4fd" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="310.0" y="650.0" class="label" text-anchor="middle" >Position-wise FFN</text>
+<text x="310.0" y="673.0" class="detail" text-anchor="middle" >D → d_ff → D · ReLU</text>
+<rect x="160" y="723" width="300" height="44" rx="12" fill="#fff4d6" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="310.0" y="751.0" class="label" text-anchor="middle" >Add &amp; Norm</text>
+<path d="M310 326 V413" class="edge"/>
+<path d="M310 473 V513" class="edge"/>
+<path d="M310 557 V623" class="edge"/>
+<path d="M310 683 V723" class="edge"/>
+<path d="M310 396 H110 V535 H160" class="skip"/>
+<path d="M310 595 H110 V745 H160" class="skip"/>
+<path d="M310 767 V850" class="edge"/>
+<rect x="160" y="850" width="300" height="70" rx="12" fill="#e5f5ef" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="310.0" y="882.0" class="label" text-anchor="middle" >Final encoder memory</text>
+<text x="310.0" y="905.0" class="detail" text-anchor="middle" >[B, S, D]</text>
+<rect x="755" y="413" width="300" height="60" rx="12" fill="#edf4fd" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="905.0" y="440.0" class="label" text-anchor="middle" >Masked self-attention</text>
+<text x="905.0" y="463.0" class="detail" text-anchor="middle" >Q, K, V from target state</text>
+<rect x="755" y="513" width="300" height="44" rx="12" fill="#fff4d6" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="905.0" y="541.0" class="label" text-anchor="middle" >Add &amp; Norm</text>
+<rect x="755" y="613" width="300" height="60" rx="12" fill="#e5f5ef" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="905.0" y="640.0" class="label" text-anchor="middle" >Cross-attention</text>
+<text x="905.0" y="663.0" class="detail" text-anchor="middle" >Q: decoder · K, V: memory</text>
+<rect x="755" y="713" width="300" height="44" rx="12" fill="#fff4d6" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="905.0" y="741.0" class="label" text-anchor="middle" >Add &amp; Norm</text>
+<rect x="755" y="813" width="300" height="60" rx="12" fill="#edf4fd" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="905.0" y="840.0" class="label" text-anchor="middle" >Position-wise FFN</text>
+<text x="905.0" y="863.0" class="detail" text-anchor="middle" >D → d_ff → D · ReLU</text>
+<rect x="755" y="913" width="300" height="44" rx="12" fill="#fff4d6" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="905.0" y="941.0" class="label" text-anchor="middle" >Add &amp; Norm</text>
+<path d="M905 326 V413" class="edge"/>
+<path d="M905 473 V513" class="edge"/>
+<path d="M905 557 V613" class="edge"/>
+<path d="M905 673 V713" class="edge"/>
+<path d="M905 757 V813" class="edge"/>
+<path d="M905 873 V913" class="edge"/>
+<path d="M905 396 H1105 V535 H1055" class="skip"/>
+<path d="M905 595 H1105 V735 H1055" class="skip"/>
+<path d="M905 795 H1105 V935 H1055" class="skip"/>
+<path d="M460 885 H605 V643 H755" fill="none" stroke="#23796a" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#memory-arrow)"/>
+<text x="615" y="865" class="detail" text-anchor="start" >to every</text>
+<text x="615" y="888" class="detail" text-anchor="start" >decoder layer</text>
+<text x="623" y="627" class="label" text-anchor="start" >K, V</text>
+<path d="M905 957 V1040" class="edge"/>
+<rect x="755" y="1040" width="300" height="60" rx="12" fill="#f4edfd" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="905.0" y="1067.0" class="label" text-anchor="middle" >Shared output projection</text>
+<text x="905.0" y="1090.0" class="detail" text-anchor="middle" >H @ Eᵀ → logits [B, T, V]</text>
+<path d="M905 1100 V1140" class="edge"/>
+<rect x="755" y="1140" width="300" height="60" rx="12" fill="#e5f5ef" stroke="#c5cfde" stroke-width="1.5"/>
+<text x="905.0" y="1167.0" class="label" text-anchor="middle" >Softmax over vocabulary</text>
+<text x="905.0" y="1190.0" class="detail" text-anchor="middle" >probabilities [B, T, V]</text>
+<text x="905" y="1228" class="detail" text-anchor="middle" >Applied outside forward() when needed</text>
+<rect x="80" y="987" width="555" height="235" rx="14" fill="#f8fafc" stroke="#dce2eb" stroke-width="1.5"/>
+<text x="105" y="1022" class="group" text-anchor="start" >READING THE DIAGRAM</text>
+<text x="105" y="1055" class="detail" text-anchor="start" >Add &amp; Norm = LayerNorm(x + Dropout(sublayer(x)))</text>
+<text x="105" y="1086" class="detail" text-anchor="start" >Thin side paths carry the residual x.</text>
+<text x="105" y="1117" class="detail" text-anchor="start" >Self-attention on the decoder blocks future keys.</text>
+<text x="105" y="1148" class="detail" text-anchor="start" >All attention operations also mask the relevant PAD keys.</text>
+<text x="105" y="1179" class="detail" text-anchor="start" >Repeated layers have distinct parameters.</text>
+<text x="105" y="1205" class="detail" text-anchor="start" >Only embeddings and the vocabulary projection share E.</text>
+<text x="50" y="1280" class="sub" text-anchor="start" >Study diagram based on Vaswani et al., NIPS 2017, Figure 1. Flow is drawn from top to bottom.</text>
+</svg>
