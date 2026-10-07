@@ -3,3 +3,4 @@ debug.py
 __pycache__/
 demo.py
 
+.vscode/

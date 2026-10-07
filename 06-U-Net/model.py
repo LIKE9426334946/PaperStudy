@@ -5,6 +5,7 @@
 """
 
 import math
+import torch
 
 from torch import Tensor, nn
 
@@ -77,23 +78,38 @@ class UNet(nn.Module):
             raise ValueError("H、W 须分别 >= 188 且 H % 16 == W % 16 == 12")
 
         # 以下 Shape 均以 x: [B, 1, 572, 572] 为例。
-        e1 = self.enc1(x)       # [B,   64, 568, 568]
-        p1 = self.pool(e1)      # [B,   64, 284, 284]
-        e2 = self.enc2(p1)      # [B,  128, 280, 280]
-        p2 = self.pool(e2)      # [B,  128, 140, 140]
-        e3 = self.enc3(p2)      # [B,  256, 136, 136]
-        p3 = self.pool(e3)      # [B,  256,  68,  68]
-        e4 = self.enc4(p3)      # [B,  512,  64,  64]
+        e1 = self.enc1(x)  # [B,   64, 568, 568]
+        p1 = self.pool(e1)  # [B,   64, 284, 284]
+        e2 = self.enc2(p1)  # [B,  128, 280, 280]
+        p2 = self.pool(e2)  # [B,  128, 140, 140]
+        e3 = self.enc3(p2)  # [B,  256, 136, 136]
+        p3 = self.pool(e3)  # [B,  256,  68,  68]
+        e4 = self.enc4(p3)  # [B,  512,  64,  64]
         e4 = self.drop4(e4)
-        p4 = self.pool(e4)      # [B,  512,  32,  32]
+        p4 = self.pool(e4)  # [B,  512,  32,  32]
 
-        z = self.bottleneck(p4) # [B, 1024,  28,  28]
+        z = self.bottleneck(p4)  # [B, 1024,  28,  28]
         z = self.drop5(z)
 
         # 同尺度 encoder 特征经中心裁剪后，沿通道维拼接。
-        d4 = self.dec4(z, e4)   # [B,  512,  52,  52]
+        d4 = self.dec4(z, e4)  # [B,  512,  52,  52]
         d3 = self.dec3(d4, e3)  # [B,  256, 100, 100]
         d2 = self.dec2(d3, e2)  # [B,  128, 196, 196]
         d1 = self.dec1(d2, e1)  # [B,   64, 388, 388]
         logits = self.head(d1)  # [B,    K, 388, 388]
         return logits
+
+
+if __name__ == "__main__":
+    model = UNet(dropout_p=0.0).eval()
+    x = torch.randn(1, 1, 188, 188)
+    with torch.no_grad():
+        model(x)
+    torch.onnx.export(
+        model,
+        x,
+        "unet.onnx",
+        input_names=["input"],
+        output_names=["output"],
+        dynamo=True,
+    )
