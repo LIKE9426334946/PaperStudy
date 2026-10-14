@@ -133,7 +133,7 @@ if __name__ == "__main__":
         torch.onnx.export(
             model, (x,), str(onnx_path),
             input_names=["image"], output_names=output_names,
-            opset_version=17, dynamo=False,
+            opset_version=17, dynamo=True,
         )
 
     # 3. 用刚才同一份 x 核对全部输出；容许浮点运算顺序带来的微小误差。

@@ -146,7 +146,7 @@ if __name__ == "__main__":
             output_names=["logits"],
             opset_version=18,
             dynamo=True,
-            optimize=False,        # 便于观察导出的数据流；不是逐 Python 行的展示
+            optimize=True,        # 便于观察导出的数据流；不是逐 Python 行的展示
             external_data=True,    # 大型 VGG16 权重保存到同目录的 .onnx.data
         )
 

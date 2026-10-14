@@ -82,7 +82,7 @@ if __name__ == "__main__":
         torch.onnx.export(
             model, (x,), str(onnx_path),
             input_names=["image"], output_names=["logits"],
-            opset_version=18, dynamo=True, optimize=False, external_data=False,
+            opset_version=18, dynamo=True, optimize=True, external_data=False,
         )
 
     # 3. 把同一份 x 送入 ONNX Runtime，对照刚才保存的 PyTorch logits。
