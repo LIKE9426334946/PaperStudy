@@ -1,0 +1,6 @@
+# Python >= 3.10；torch.onnx.export 显式使用 dynamo=False。
+# 如果已安装所需 CUDA 版本的 PyTorch，可保留现有安装。
+torch>=2.6
+numpy>=1.24
+onnx>=1.17
+onnxruntime>=1.20
